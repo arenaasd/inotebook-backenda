@@ -3,6 +3,7 @@ const router = express.Router();
 const Usermodel = require('../models/User');
 const { body, validationResult } = require('express-validator');
 const bcrypt = require('bcryptjs');
+const connectToDB = require('../config/mongoose-connection');
 const jwt = require('jsonwebtoken');
 const fetchuser = require('../middlewares/fetchuser')
 
@@ -13,6 +14,7 @@ router.post('/register', [
     body('email').isEmail(),
     body('password').isLength({ min: 5 })
 ], async (req, res) => {
+     await connectToDB();
     let success = false;
     try {
         const errors = validationResult(req);
@@ -47,6 +49,7 @@ router.post('/login', [
     body('email').isEmail(),
     body('password').exists()
 ], async (req, res) => {
+     await connectToDB();
     let success = false;
     try {
         const errors = validationResult(req);
@@ -79,6 +82,7 @@ router.post('/login', [
 
 router.post('/getuser', fetchuser, async (req, res) => {
     try {
+         await connectToDB();
         const id = req.user.id;
         const user = await Usermodel.findById(id).select('-password');
         res.send(user)
