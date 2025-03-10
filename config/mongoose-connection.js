@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-// Remove the newline character at the end of the URI
+// Make sure this is a single line with no newline characters
 const uri = "mongodb+srv://akgamerz397:nadanak420@cluster0.rcjgs.mongodb.net/inotebook?retryWrites=true&w=majority&appName=Cluster0";
 
 const connectToDB = async () => {
