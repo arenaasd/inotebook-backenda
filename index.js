@@ -16,6 +16,10 @@ app.use('/api/notes', notes);
 
 const port = process.env.PORT || 3000;
 
+// Start the server
 app.listen(port, () => {
     console.log(`App is running on port ${port}`);
 });
+
+// Optional export of the app (if you need to use it elsewhere)
+module.exports = app;  // This export is optional and is only needed if you want to use app in tests or another module
